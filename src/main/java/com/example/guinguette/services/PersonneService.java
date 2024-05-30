@@ -43,4 +43,12 @@ public class PersonneService {
     public long getTotalNumberOfPersonnes() {
         return personneRepository.countPersonnes();
     }
+
+    public Long countPichetsByPersonneId(Long personneId) {
+        return personneRepository.countPichetsByPersonneId(personneId);
+    }
+
+    public Long getAmountByPersonneId(Long personneId) {
+        return personneRepository.sumAmountByPersonneId(personneId);
+    }
 }

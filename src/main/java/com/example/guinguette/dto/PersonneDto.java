@@ -6,7 +6,6 @@ public class PersonneDto {
     private Long id;
     private String nom;
     private String prenom;
-    private Double degre;
 
     // Constructeur par défaut
     public PersonneDto() {
@@ -37,11 +36,4 @@ public class PersonneDto {
         this.prenom = prenom;
     }
 
-    public Double getDegreAlcool() {
-        return degre;
-    }
-
-    public void setDegreAlcool(Double degre) {
-        this.degre = degre;
-    }
 }

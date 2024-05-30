@@ -44,4 +44,12 @@ public class PichetService {
         Pichet pichet = pichetRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pichet not found"));
         pichetRepository.delete(pichet);
     }
+
+    public Double getTotalAmount() {
+        return pichetRepository.sumAmountTotal();
+    }
+
+    public Long getNbPichets() {
+        return pichetRepository.countPichets();
+    }
 }

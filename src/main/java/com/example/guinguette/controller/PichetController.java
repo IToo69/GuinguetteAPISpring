@@ -66,22 +66,12 @@ public class PichetController {
 
     @GetMapping("/totalamount")
     public ResponseEntity<Double> getMontantTotalPichets() {
-        return ResponseEntity.ok(pichetService.calculerMontantTotalPichets());
-    }
-
-    @GetMapping("/{id}/totalamount")
-    public ResponseEntity<Double> getMontantPichetsPourPersonne(@PathVariable Long id) {
-        return ResponseEntity.ok(pichetService.calculerMontantTotalPichetsPourPersonne(id));
+        return ResponseEntity.ok(pichetService.getTotalAmount());
     }
 
     @GetMapping("/totalcount")
     public ResponseEntity<Long> getNombreTotalPichets() {
         return ResponseEntity.ok(pichetService.getNbPichets());
-    }
-
-    @GetMapping("/{id}/totalcount")
-    public ResponseEntity<Long> getNombrePichetsPourPersonne(@PathVariable Long id) {
-        return ResponseEntity.ok(pichetService.getNbPichetsPourPersonne(id));
     }
 
 }

@@ -8,14 +8,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PersonneRepository extends JpaRepository<Personne, Long> {
 
-    // Méthode pour calculer le nombre de pichets
-    @Query("SELECT COUNT(p) FROM Pichet p")
-    long countAllPichets();
     
+
+    @Query("SELECT COUNT(p) FROM Personne p")
+    long countPersonnes();
+
     // Méthode pour calculer le nombre de pichets pour une personne donnée
     @Query("SELECT COUNT(p) FROM Pichet p WHERE p.personne.id = :personneId")
     long countPichetsByPersonneId(@Param("personneId") Long personneId);
 
-    @Query("SELECT COUNT(p) FROM Personne p")
-    long countPersonnes();
+    @Query("SELECT SUM(p.prix) FROM Pichet p WHERE p.personne.id = :personneId")
+    long sumAmountByPersonneId(@Param("personneId") Long personneId);
 }

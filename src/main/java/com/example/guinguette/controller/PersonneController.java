@@ -35,10 +35,6 @@ public class PersonneController {
         Personne newPersonne = new Personne();
         newPersonne.setNom(personneDto.getNom());
         newPersonne.setPrenom(personneDto.getPrenom());
-        newPersonne.setDegre(personneDto.getDegreAlcool());
-        if(newPersonne.getDegre() == null){
-            newPersonne.setDegre(0.0);
-        }
 
         return personneService.createPersonne(newPersonne);
 
@@ -58,13 +54,28 @@ public class PersonneController {
         personneService.deletePersonne(id);
     }
 
-    @GetMapping("/T")
-    public ResponseEntity<Long> getAvgOfMoneyForPersonne() {
-        double amount = pichetService.calculerMontantTotalPichets();
-        long personnes = personneService.getTotalNumberOfPersonnes();
-        long longAmount = (long) amount;
-        return ResponseEntity.ok(personnes/longAmount);
+    @GetMapping("/totalcount")
+    public ResponseEntity<Long> getNombrePersonnes() {
+        return ResponseEntity.ok(personneService.getTotalNumberOfPersonnes());
     }
 
+    @GetMapping("/{id}/totalpichets")
+    public ResponseEntity<Long> countPichetByPersonneId(@PathVariable Long id) {
+        return ResponseEntity.ok(personneService.countPichetsByPersonneId(id));
+    }
+
+    @GetMapping("/{id}/totalamount")
+    public ResponseEntity<Long> getAmountByPersonneId(@PathVariable Long id) {
+        return ResponseEntity.ok(personneService.getAmountByPersonneId(id));
+    }
+
+    @GetMapping("/avgamount")
+    public ResponseEntity<Long> getAvgOfMoneyForPersonne() {
+        double amount = pichetService.getTotalAmount();
+        Long personnes = personneService.getTotalNumberOfPersonnes();
+        Long longAmount = (long) amount;
+        Long res = personnes/longAmount;
+        return ResponseEntity.ok(res);
+    }
     
 }
