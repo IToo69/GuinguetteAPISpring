@@ -1,5 +1,6 @@
 package com.example.guinguette.controller;
 
+import com.example.guinguette.dto.DayOfWeekCount;
 import com.example.guinguette.dto.PichetDto;
 import com.example.guinguette.entities.Pichet;
 import com.example.guinguette.services.PersonneService;
@@ -64,14 +65,19 @@ public class PichetController {
         pichetService.deletePichet(id);
     }
 
-    @GetMapping("/totalamount")
+    @GetMapping("/total-amount")
     public ResponseEntity<Double> getMontantTotalPichets() {
         return ResponseEntity.ok(pichetService.getTotalAmount());
     }
 
-    @GetMapping("/totalcount")
+    @GetMapping("/total-count")
     public ResponseEntity<Long> getNombreTotalPichets() {
         return ResponseEntity.ok(pichetService.getNbPichets());
+    }
+
+    @GetMapping("/count-by-day-of-week")
+    public List<DayOfWeekCount> getPichetCountByDayOfWeekOrdered() {
+        return pichetService.getPichetCountByDayOfWeekOrdered();
     }
 
 }

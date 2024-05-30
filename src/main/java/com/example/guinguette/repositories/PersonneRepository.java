@@ -1,5 +1,6 @@
 package com.example.guinguette.repositories;
 
+import com.example.guinguette.dto.DayOfWeekCount;
 import com.example.guinguette.entities.Personne;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public interface PersonneRepository extends JpaRepository<Personne, Long> {
 
     @Query("SELECT SUM(p.prix) FROM Pichet p WHERE p.personne.id = :personneId")
     long sumAmountByPersonneId(@Param("personneId") Long personneId);
+
 
 
 }

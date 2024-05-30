@@ -31,7 +31,7 @@ public class PersonneController {
         
     }
 
-    @GetMapping("/trienom")
+    @GetMapping("/trie-nom")
     public List<Personne> getAllPersonnesOrderedByNom() {
         return personneService.getAllPersonnesOrderedByNom();
     }
@@ -60,17 +60,17 @@ public class PersonneController {
         personneService.deletePersonne(id);
     }
 
-    @GetMapping("/totalcount")
+    @GetMapping("/total-count")
     public ResponseEntity<Long> getNombrePersonnes() {
         return ResponseEntity.ok(personneService.getTotalNumberOfPersonnes());
     }
 
-    @GetMapping("/{id}/totalpichets")
+    @GetMapping("/{id}/total-pichets")
     public ResponseEntity<Long> countPichetByPersonneId(@PathVariable Long id) {
         return ResponseEntity.ok(personneService.countPichetsByPersonneId(id));
     }
 
-    @GetMapping("/{id}/totalamount")
+    @GetMapping("/{id}/total-amount")
     public ResponseEntity<Long> getAmountByPersonneId(@PathVariable Long id) {
         Long res;
         if(personneService.countPichetsByPersonneId(id) == 0){
@@ -82,7 +82,7 @@ public class PersonneController {
         return ResponseEntity.ok(res);
     }
 
-    @GetMapping("/avgamount")
+    @GetMapping("/avg-amount")
     public ResponseEntity<Long> getAvgOfMoneyForPersonne() {
         double amount = pichetService.getTotalAmount();
         Long personnes = personneService.getTotalNumberOfPersonnes();

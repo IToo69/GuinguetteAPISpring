@@ -1,5 +1,6 @@
 package com.example.guinguette.services;
 
+import com.example.guinguette.dto.DayOfWeekCount;
 import com.example.guinguette.entities.Pichet;
 import com.example.guinguette.exception.ResourceNotFoundException;
 import com.example.guinguette.repositories.PichetRepository;
@@ -51,5 +52,9 @@ public class PichetService {
 
     public Long getNbPichets() {
         return pichetRepository.countPichets();
+    }
+
+    public List<DayOfWeekCount> getPichetCountByDayOfWeekOrdered() {
+        return pichetRepository.findPichetCountByDayOfWeekOrdered();
     }
 }
