@@ -18,6 +18,10 @@ public class PersonneService {
         return personneRepository.findAll();
     }
 
+    public List<Personne> getAllPersonnesOrderedByNom() {
+        return personneRepository.orderedByNom();
+    }
+
     public Personne getPersonneById(Long id) {
         return personneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Personne not found"));
     }
@@ -50,5 +54,6 @@ public class PersonneService {
 
     public Long getAmountByPersonneId(Long personneId) {
         return personneRepository.sumAmountByPersonneId(personneId);
+
     }
 }

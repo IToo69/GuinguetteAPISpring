@@ -28,6 +28,12 @@ public class PersonneController {
     @GetMapping("/{id}")
     public Personne getPersonneById(@PathVariable Long id) {
         return personneService.getPersonneById(id);
+        
+    }
+
+    @GetMapping("/trienom")
+    public List<Personne> getAllPersonnesOrderedByNom() {
+        return personneService.getAllPersonnesOrderedByNom();
     }
 
     @PostMapping
@@ -66,7 +72,14 @@ public class PersonneController {
 
     @GetMapping("/{id}/totalamount")
     public ResponseEntity<Long> getAmountByPersonneId(@PathVariable Long id) {
-        return ResponseEntity.ok(personneService.getAmountByPersonneId(id));
+        Long res;
+        if(personneService.countPichetsByPersonneId(id) == 0){
+            res = (long)0.0;
+        }
+        else{
+            res = personneService.getAmountByPersonneId(id);
+        }
+        return ResponseEntity.ok(res);
     }
 
     @GetMapping("/avgamount")
@@ -74,7 +87,7 @@ public class PersonneController {
         double amount = pichetService.getTotalAmount();
         Long personnes = personneService.getTotalNumberOfPersonnes();
         Long longAmount = (long) amount;
-        Long res = personnes/longAmount;
+        Long res = longAmount/personnes;
         return ResponseEntity.ok(res);
     }
     
