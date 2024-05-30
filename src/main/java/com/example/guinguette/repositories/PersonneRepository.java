@@ -1,6 +1,5 @@
 package com.example.guinguette.repositories;
 
-import com.example.guinguette.dto.DayOfWeekCount;
 import com.example.guinguette.entities.Personne;
 
 import java.util.List;

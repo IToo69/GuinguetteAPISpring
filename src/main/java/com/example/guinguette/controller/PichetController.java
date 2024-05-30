@@ -1,6 +1,5 @@
 package com.example.guinguette.controller;
 
-import com.example.guinguette.dto.DayOfWeekCount;
 import com.example.guinguette.dto.PichetDto;
 import com.example.guinguette.entities.Pichet;
 import com.example.guinguette.services.PersonneService;
@@ -10,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/guinguette/pichets")
@@ -75,9 +75,38 @@ public class PichetController {
         return ResponseEntity.ok(pichetService.getNbPichets());
     }
 
+    
     @GetMapping("/count-by-day-of-week")
-    public List<DayOfWeekCount> getPichetCountByDayOfWeekOrdered() {
-        return pichetService.getPichetCountByDayOfWeekOrdered();
+    public List<String> getPichetCountByDayOfWeekOrdered() {
+        List<String> pichetDays = pichetService.getPichetCountByDayOfWeekOrdered();
+        
+        List<String> pichetDaysInFrench = pichetDays.stream()
+                .map(this::translateDayNameToFrench)
+                .collect(Collectors.toList());
+
+        return pichetDaysInFrench;
     }
+
+    private String translateDayNameToFrench(String dayName) {
+        switch (dayName) {
+            case "Monday":
+                return "Lundi";
+            case "Tuesday":
+                return "Mardi";
+            case "Wednesday":
+                return "Mercredi";
+            case "Thursday":
+                return "Jeudi";
+            case "Friday":
+                return "Vendredi";
+            case "Saturday":
+                return "Samedi";
+            case "Sunday":
+                return "Dimanche";
+            default:
+                return dayName; 
+        }
+    }
+    
 
 }
