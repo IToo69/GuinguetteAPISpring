@@ -23,6 +23,13 @@ public interface PichetRepository extends JpaRepository<Pichet, Long> {
            "GROUP BY DAYNAME(p.date) " +
            "ORDER BY COUNT(p) DESC")
     List<String> findPichetCountByDayOfWeekOrdered();
+
+    @Query("SELECT DATE(p.date), COUNT(p) as pichetCount " +
+           "FROM Pichet p " +
+           "GROUP BY DATE(p.date) " +
+           "ORDER BY pichetCount DESC " +
+           "LIMIT 5")
+    List<Object[]> findTop5DaysWithMostPichets();
     
 
 }

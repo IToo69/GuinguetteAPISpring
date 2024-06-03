@@ -90,5 +90,30 @@ public class PersonneController {
         Long res = longAmount/personnes;
         return ResponseEntity.ok(res);
     }
+
+    @GetMapping("/top5PersonnesWithMostPichets")
+    public List<Personne> getTop5PersonnesWithMostPichets() {
+        return personneService.getTop5PersonnesWithMostPichets();
+    }
+
+    @GetMapping("/top5PersonnesWithMostPichetsToday")
+    public List<Personne> getTop5PersonnesWithMostPichetsToday() {
+        return personneService.getTop5PersonnesWithMostPichetsToday();
+    }
+
+    @GetMapping("/top5PersonnesWithMostPichetsThisWeek")
+    public List<Personne> getTop5PersonnesWithMostPichetsThisWeek() {
+        return personneService.getTop5PersonnesWithMostPichetsThisWeek();
+    }
+
+    @GetMapping("/top5PersonnesWithMostPichetsThisMonth")
+    public List<Personne> getTop5PersonnesWithMostPichetsThisMonth() {
+        return personneService.getTop5PersonnesWithMostPichetsThisMonth();
+    }
+
+    @GetMapping("/top5PersonnesWithMostPichetsThisYear")
+    public List<Personne> getTop5PersonnesWithMostPichetsThisYear() {
+        return personneService.getTop5PersonnesWithMostPichetsThisYear();
+    }
     
 }

@@ -5,7 +5,10 @@ import com.example.guinguette.exception.ResourceNotFoundException;
 import com.example.guinguette.repositories.PichetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PichetService {
@@ -56,6 +59,13 @@ public class PichetService {
     
     public List<String> getPichetCountByDayOfWeekOrdered() {
         return pichetRepository.findPichetCountByDayOfWeekOrdered();
+    }
+
+    public List<LocalDate> getTop5DaysWithMostPichets() {
+        List<Object[]> results = pichetRepository.findTop5DaysWithMostPichets();
+        return results.stream()
+                      .map(result -> ((java.sql.Date) result[0]).toLocalDate())
+                      .collect(Collectors.toList());
     }
     
 }

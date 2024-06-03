@@ -24,6 +24,43 @@ public interface PersonneRepository extends JpaRepository<Personne, Long> {
     @Query("SELECT SUM(p.prix) FROM Pichet p WHERE p.personne.id = :personneId")
     long sumAmountByPersonneId(@Param("personneId") Long personneId);
 
+    @Query("SELECT p.personne, COUNT(p) as pichetCount " +
+           "FROM Pichet p " +
+           "GROUP BY p.personne " +
+           "ORDER BY pichetCount DESC " +
+           "LIMIT 5")
+    List<Object[]> findTop5PersonnesWithMostPichets();
 
+    @Query("SELECT p.personne, COUNT(p) as pichetCount " +
+           "FROM Pichet p " +
+           "WHERE DATE(p.date) = CURRENT_DATE " +
+           "GROUP BY p.personne " +
+           "ORDER BY pichetCount DESC " +
+           "LIMIT 5")
+    List<Object[]> findTop5PersonnesWithMostPichetsToday();
+
+    @Query("SELECT p.personne, COUNT(p) as pichetCount " +
+           "FROM Pichet p " +
+           "WHERE YEAR(p.date) = YEAR(CURRENT_DATE) AND WEEK(p.date) = WEEK(CURRENT_DATE) " +
+           "GROUP BY p.personne " +
+           "ORDER BY pichetCount DESC " +
+           "LIMIT 5")
+    List<Object[]> findTop5PersonnesWithMostPichetsThisWeek();
+
+    @Query("SELECT p.personne, COUNT(p) as pichetCount " +
+           "FROM Pichet p " +
+           "WHERE YEAR(p.date) = YEAR(CURRENT_DATE) AND MONTH(p.date) = MONTH(CURRENT_DATE) " +
+           "GROUP BY p.personne " +
+           "ORDER BY pichetCount DESC " +
+           "LIMIT 5")
+    List<Object[]> findTop5PersonnesWithMostPichetsThisMonth();
+
+    @Query("SELECT p.personne, COUNT(p) as pichetCount " +
+           "FROM Pichet p " +
+           "WHERE YEAR(p.date) = YEAR(CURRENT_DATE) " +
+           "GROUP BY p.personne " +
+           "ORDER BY pichetCount DESC " +
+           "LIMIT 5")
+    List<Object[]> findTop5PersonnesWithMostPichetsThisYear();
 
 }

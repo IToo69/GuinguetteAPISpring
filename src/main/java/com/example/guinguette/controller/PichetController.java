@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -76,6 +79,7 @@ public class PichetController {
     }
 
     
+    //Retourne dans l'ordre les jours de la semaine où le plus de pichets sont vendus
     @GetMapping("/count-by-day-of-week")
     public List<String> getPichetCountByDayOfWeekOrdered() {
         List<String> pichetDays = pichetService.getPichetCountByDayOfWeekOrdered();
@@ -106,6 +110,11 @@ public class PichetController {
             default:
                 return dayName; 
         }
+    }
+
+    @GetMapping("/top5DaysWithMostPichets")
+    public List<LocalDate> getTop5DaysWithMostPichets() {
+        return pichetService.getTop5DaysWithMostPichets();
     }
     
 
